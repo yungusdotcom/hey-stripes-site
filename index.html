@@ -1,0 +1,813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Hey Stripes — Ref Accountability</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Hey Stripes is a sports content brand dedicated to calling out bad calls, blown whistles, and ref chaos with humor and accountability." />
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg: #0d0d0d;
+      --text: #ffffff;
+      --orange: #ff6b00;
+      --yellow: #ffd400;
+      --muted: #1f1f1f;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+      background: radial-gradient(circle at top, #262626 0, #0d0d0d 45%);
+      color: var(--text);
+      line-height: 1.5;
+      scroll-behavior: smooth;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header,
+    main,
+    footer {
+      width: 100%;
+    }
+
+    .nav {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 16px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-logo-circle {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Anton", sans-serif;
+      font-size: 11px;
+      text-align: center;
+      color: #000;
+    }
+
+    .nav-title {
+      font-family: "Anton", sans-serif;
+      font-size: 20px;
+      letter-spacing: 0.06em;
+    }
+
+    .nav-tagline {
+      font-size: 12px;
+      text-transform: uppercase;
+      color: #d4d4d4;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+    }
+
+    .nav-links a {
+      padding-bottom: 2px;
+      border-bottom: 1px solid transparent;
+    }
+
+    .nav-links a:hover {
+      border-color: var(--orange);
+    }
+
+    /* HERO */
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: left;
+      min-height: calc(100vh - 72px);
+      padding: 40px 20px 60px;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      width: 100%;
+      display: grid;
+      grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+      gap: 40px;
+      align-items: center;
+    }
+
+    .hero-label {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+      color: var(--yellow);
+      margin-bottom: 10px;
+    }
+
+    .hero-title {
+      font-family: "Anton", sans-serif;
+      font-size: clamp(42px, 6vw, 64px);
+      letter-spacing: 0.08em;
+    }
+
+    .hero-sub {
+      font-size: 18px;
+      margin-top: 8px;
+      color: #e5e5e5;
+    }
+
+    .hero-mantra {
+      margin-top: 18px;
+      font-size: 20px;
+      font-weight: 600;
+      color: var(--orange);
+      text-transform: uppercase;
+    }
+
+    .hero-copy {
+      margin-top: 18px;
+      max-width: 460px;
+      font-size: 14px;
+      color: #d4d4d4;
+    }
+
+    .hero-actions {
+      margin-top: 24px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 26px;
+      border-radius: 999px;
+      border: none;
+      background: var(--orange);
+      color: #000;
+      font-size: 13px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, background 0.12s ease;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-1px);
+      background: #ff801f;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.7);
+    }
+
+    .btn-ghost {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      border-bottom: 1px solid #404040;
+      cursor: pointer;
+      padding-bottom: 3px;
+      color: #e5e5e5;
+    }
+
+    .hero-footnote {
+      margin-top: 12px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: #a3a3a3;
+    }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-card {
+      width: 100%;
+      max-width: 360px;
+      background: radial-gradient(circle at top, #272727, #111111);
+      border-radius: 24px;
+      padding: 22px 20px 18px;
+      border: 1px solid #262626;
+      box-shadow: 0 22px 70px rgba(0, 0, 0, 0.75);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .hero-logo-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      align-items: flex-start;
+    }
+
+    .burst {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, var(--orange), #b24900);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: "Anton", sans-serif;
+      font-size: 26px;
+      text-align: center;
+      color: #000;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.8);
+      position: relative;
+    }
+
+    .burst::after {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border-radius: 50%;
+      border: 3px solid #000;
+      box-shadow: 0 0 0 2px #000 inset;
+    }
+
+    .burst-text {
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-quote {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #e5e5e5;
+    }
+
+    .hero-pill {
+      font-size: 10px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #171717;
+      border: 1px solid #323232;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #a3a3a3;
+    }
+
+    .hero-meta-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #a3a3a3;
+    }
+
+    .hero-tagline-small {
+      font-size: 11px;
+      color: #e5e5e5;
+    }
+
+    .divider {
+      height: 1px;
+      background: linear-gradient(to right, transparent, #404040, transparent);
+      margin: 40px auto;
+      max-width: 1120px;
+    }
+
+    main section {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 20px 20px 40px;
+    }
+
+    .section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: #a3a3a3;
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-family: "Anton", sans-serif;
+      font-size: 26px;
+      letter-spacing: 0.08em;
+      margin-bottom: 12px;
+    }
+
+    .section-body {
+      font-size: 14px;
+      max-width: 640px;
+      color: #d4d4d4;
+    }
+
+    /* Ethos */
+    .ethos-highlight {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--orange);
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    /* Callout Section */
+    .callout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.4fr);
+      gap: 30px;
+      margin-top: 10px;
+    }
+
+    .callout-left {
+      border-radius: 22px;
+      background: radial-gradient(circle at top, #1f1f1f, #050505);
+      border: 1px solid #272727;
+      min-height: 200px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .callout-stripes {
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        45deg,
+        rgba(255, 255, 255, 0.08),
+        rgba(255, 255, 255, 0.08) 10px,
+        transparent 10px,
+        transparent 22px
+      );
+      mix-blend-mode: screen;
+      opacity: 0.35;
+    }
+
+    .callout-inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      padding: 20px 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .callout-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: #e5e5e5;
+    }
+
+    .callout-badge {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 1px solid #404040;
+      color: #f97373;
+      align-self: flex-start;
+    }
+
+    .callout-right {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .callout-quote {
+      font-family: "Anton", sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.04em;
+    }
+
+    .callout-sub {
+      font-size: 13px;
+      color: #c4c4c4;
+    }
+
+    /* Clips */
+    .clips-grid {
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .clip-card {
+      background: #111;
+      border-radius: 18px;
+      border: 1px solid #252525;
+      padding: 10px 10px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .clip-card::before {
+      content: "";
+      position: absolute;
+      inset: -40%;
+      background: radial-gradient(circle at top, rgba(255, 107, 0, 0.12), transparent);
+      opacity: 0;
+      transition: opacity 0.16s ease;
+    }
+
+    .clip-thumb {
+      height: 150px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #272727, #050505);
+      border: 1px solid #333;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clip-play {
+      width: 42px;
+      height: 42px;
+      border-radius: 999px;
+      background: rgba(0, 0, 0, 0.7);
+      border: 2px solid var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .clip-play::before {
+      content: "";
+      border-style: solid;
+      border-width: 8px 0 8px 12px;
+      border-color: transparent transparent transparent var(--orange);
+      margin-left: 2px;
+    }
+
+    .clip-tag {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #a3a3a3;
+    }
+
+    .clip-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .clip-meta {
+      font-size: 11px;
+      color: #a3a3a3;
+    }
+
+    .clip-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 60px rgba(0, 0, 0, 0.8);
+      border-color: #444;
+    }
+
+    .clip-card:hover::before {
+      opacity: 1;
+    }
+
+    /* Signup */
+    .signup {
+      margin-top: 10px;
+      border-radius: 26px;
+      padding: 26px 22px;
+      background: radial-gradient(circle at top left, #1f1f1f, #050505);
+      border: 1px solid #2a2a2a;
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 2fr);
+      gap: 20px;
+      align-items: center;
+    }
+
+    .signup-title {
+      font-family: "Anton", sans-serif;
+      font-size: 24px;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .signup-sub {
+      font-size: 13px;
+      color: #d4d4d4;
+      max-width: 360px;
+    }
+
+    .signup-form {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .input {
+      flex: 1 1 200px;
+      min-width: 0;
+      border-radius: 999px;
+      border: 1px solid #3a3a3a;
+      padding: 10px 14px;
+      font-size: 13px;
+      background: #050505;
+      color: #fafafa;
+      outline: none;
+    }
+
+    .input::placeholder {
+      color: #737373;
+    }
+
+    .input:focus {
+      border-color: var(--orange);
+    }
+
+    .signup-note {
+      margin-top: 6px;
+      font-size: 11px;
+      color: #a3a3a3;
+    }
+
+    footer {
+      border-top: 1px solid #1f1f1f;
+      padding: 18px 20px 26px;
+      margin-top: 30px;
+    }
+
+    .footer-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 11px;
+      color: #a3a3a3;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 14px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+    }
+
+    .footer-links a:hover {
+      color: var(--orange);
+    }
+
+    /* Responsive */
+    @media (max-width: 880px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+      }
+
+      .nav-links {
+        font-size: 11px;
+        gap: 12px;
+      }
+
+      .hero-inner {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero {
+        text-align: left;
+      }
+
+      .hero-right {
+        order: -1;
+      }
+
+      .callout {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .clips-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .signup {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <nav class="nav">
+        <div class="nav-left">
+          <div class="nav-logo-circle">
+            HEY<br />STRIPES
+          </div>
+          <div>
+            <div class="nav-title">HEY STRIPES</div>
+            <div class="nav-tagline">Ref Accountability. Vision &gt; Whistles.</div>
+          </div>
+        </div>
+        <div class="nav-links">
+          <a href="#ethos">Ethos</a>
+          <a href="#clips">Clips</a>
+          <a href="#join">Join</a>
+        </div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero">
+        <div class="hero-inner">
+          <div class="hero-left">
+            <div class="hero-label">Sports culture • Fan-first</div>
+            <h1 class="hero-title">HEY STRIPES.</h1>
+            <p class="hero-sub">Ref Accountability.</p>
+            <p class="hero-mantra">Vision &gt; Whistles.</p>
+            <p class="hero-copy">
+              We call out bad calls, soft flags, and blown whistles. Not because we hate the refs — but because
+              <strong>we care too much</strong> about the game to stay quiet.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#clips" class="btn-primary">Watch the replays</a>
+              <a href="#join" class="btn-ghost">Join the whistle blowers</a>
+            </div>
+
+            <div class="hero-footnote">Film. Freeze-frame. Chirp. Repeat.</div>
+          </div>
+
+          <div class="hero-right">
+            <div class="hero-card">
+              <div class="hero-logo-wrap">
+                <div class="burst">
+                  <div class="burst-text">
+                    HEY<br />STRIPES!
+                  </div>
+                </div>
+                <div class="hero-quote">“I disagree.”</div>
+              </div>
+              <div class="hero-meta-row">
+                <span class="hero-tagline-small">I yell because I care.</span>
+                <span class="hero-pill">Bad call replay</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="ethos" class="divider"></div>
+
+      <!-- ETHOS -->
+      <section>
+        <div class="section-label">Brand ethos</div>
+        <div class="ethos-highlight">Vision &gt; Whistles.</div>
+        <p class="section-body">
+          Hey Stripes is a content brand dedicated to the art of the chirp. We slow down the footage, zoom in on
+          the chaos, and shine a light on the calls that change games. We’re here for the fans who see everything
+          and accept nothing less than a fair shot.
+        </p>
+      </section>
+
+      <!-- CALLOUT -->
+      <section>
+        <div class="section-label">Callout culture</div>
+        <div class="callout">
+          <div class="callout-left">
+            <div class="callout-stripes"></div>
+            <div class="callout-inner">
+              <div class="callout-tag">Fan to ref • 4th quarter</div>
+              <div></div>
+              <div class="callout-badge">“Hey, Stripes!” moment</div>
+            </div>
+          </div>
+          <div class="callout-right">
+            <div class="callout-quote">“I disagree.”<br />“I Yell Because I Care.”</div>
+            <div class="callout-sub">
+              Every fan has that moment — the whistle blows, the flag flies, and your soul leaves your body.
+              Hey Stripes is where that emotion lives. Loud. Honest. Clipped, captioned, and posted.
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <div id="clips" class="divider"></div>
+
+      <!-- CLIPS -->
+      <section>
+        <div class="section-label">Featured clips</div>
+        <h2 class="section-title">The calls that broke the group chat.</h2>
+        <p class="section-body">
+          Weekly breakdowns of the worst calls, softest flags, and most unhinged ref moments across every sport.
+          These are placeholder tiles for now — drop in your reels, TikToks, or YouTube shorts as embeds or links.
+        </p>
+
+        <div class="clips-grid">
+          <div class="clip-card">
+            <div class="clip-thumb">
+              <div class="clip-play"></div>
+            </div>
+            <div class="clip-tag">Week in review</div>
+            <div class="clip-title">Top 5 Blown Calls of the Week</div>
+            <div class="clip-meta">NFL • NBA • NHL • more</div>
+          </div>
+
+          <div class="clip-card">
+            <div class="clip-thumb">
+              <div class="clip-play"></div>
+            </div>
+            <div class="clip-tag">Mic’d up</div>
+            <div class="clip-title">Sideline Meltdowns &amp; Chirps</div>
+            <div class="clip-meta">Fans, coaches &amp; chaos</div>
+          </div>
+
+          <div class="clip-card">
+            <div class="clip-thumb">
+              <div class="clip-play"></div>
+            </div>
+            <div class="clip-tag">Deep cut</div>
+            <div class="clip-title">Ref Roulette: Vision &gt; Whistles</div>
+            <div class="clip-meta">Freeze-frames &amp; slow-mo receipts</div>
+          </div>
+        </div>
+      </section>
+
+      <div id="join" class="divider"></div>
+
+      <!-- SIGNUP -->
+      <section>
+        <div class="signup">
+          <div>
+            <div class="signup-title">Join the Whistle Blowers.</div>
+            <div class="signup-sub">
+              Get the weekly “You Blew It” recap — the worst calls, the loudest chirps, and the clips that keep
+              the group chat alive. No spam. Just smoke.
+            </div>
+          </div>
+          <div>
+            <form class="signup-form" onsubmit="event.preventDefault(); alert('Pretend this is connected to your email tool.');">
+              <input class="input" type="email" placeholder="Email address" required />
+              <button type="submit" class="btn-primary">Sign up</button>
+            </form>
+            <div class="signup-note">
+              By signing up, you agree that refs are human, but we’re allowed to be loud.
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <div class="footer-inner">
+        <div>© 2025 Hey Stripes. All yells reserved.</div>
+        <div class="footer-links">
+          <a href="#">IG</a>
+          <a href="#">X</a>
+          <a href="#">YouTube</a>
+        </div>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
